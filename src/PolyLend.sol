@@ -246,7 +246,7 @@ contract PolyLend is PolyLendEE, ERC1155TokenReceiver {
             loanAmount: loanAmount,
             rate: offers[_offerId].rate,
             startTime: block.timestamp,
-            minimumDuration: requests[_offerId].minimumDuration,
+            minimumDuration: requests[requestId].minimumDuration,
             callTime: 0
         });
 
