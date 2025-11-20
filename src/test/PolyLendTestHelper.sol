@@ -5,6 +5,7 @@ import {Test, console2 as console, stdStorage, StdStorage, stdError} from "../..
 import {PolyLend, PolyLendEE, Loan, Request, Offer} from "../PolyLend.sol";
 import {USDC} from "../dev/USDC.sol";
 import {DeployLib} from "../dev/DeployLib.sol";
+import {InterestLib} from "../InterestLib.sol";
 import {IConditionalTokens} from "../interfaces/IConditionalTokens.sol";
 
 contract PolyLendTestHelper is Test, PolyLendEE {
@@ -101,6 +102,6 @@ contract PolyLendTestHelper is Test, PolyLendEE {
     }
 
     function _getNewRate(uint256 _callTime) internal view returns (uint256) {
-        return (block.timestamp - _callTime) * polyLend.MAX_INTEREST() / polyLend.AUCTION_DURATION();
+        return ((block.timestamp - _callTime) * (polyLend.MAX_INTEREST() - InterestLib.ONE)) / polyLend.AUCTION_DURATION() + InterestLib.ONE;
     }
 }
