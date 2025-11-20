@@ -362,7 +362,7 @@ contract PolyLend is PolyLendEE, ERC1155TokenReceiver {
             revert AuctionHasEnded();
         }
 
-        uint256 currentInterestRate = (block.timestamp - loans[_loanId].callTime) * InterestLib.ONE_THOUSAND_APY / AUCTION_DURATION + InterestLib.ONE;
+        uint256 currentInterestRate = ((block.timestamp - loans[_loanId].callTime) * (MAX_INTEREST - InterestLib.ONE)) / AUCTION_DURATION + InterestLib.ONE;
 
         // _newRate must be less than or equal to the current offered rate
         if (_newRate > currentInterestRate) {
